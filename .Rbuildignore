@@ -1,0 +1,7 @@
+^data-raw$
+^LICENSE\.md$
+^nethoser\.Rproj$
+^\.Rproj\.user$
+test.rds
+flat.rds
+.idea
