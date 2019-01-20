@@ -11,6 +11,7 @@ Imports:
     dplyr,
     purrr,
     tidyr,
+    rlang,
     zeallot,
     magrittr
 Suggests: webhoser

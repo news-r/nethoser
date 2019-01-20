@@ -4,12 +4,12 @@
 \alias{net_entities}
 \title{Entities}
 \usage{
-net_entities(data, entity)
+net_entities(data, from, to = NULL)
 }
 \arguments{
 \item{data}{The data, as returned by \link[webhoser]{wh_collect}.}
 
-\item{entity}{Entity to build network.}
+\item{from, to}{Entities to build network.}
 }
 \value{
 A \code{list} of length 2 containing \code{data.frame}s:
@@ -25,6 +25,13 @@ Create network from entities
 The returned nodes and edges form an \emph{undirected} graph.
 }
 \examples{
+data("webhoser")
+
+graph <- webhoser \%>\%
+  net_entities(entities.persons)
+
+c(nodes, edges) \%<-\% graph
+
 data("webhoser")
 
 webhoser \%>\%
