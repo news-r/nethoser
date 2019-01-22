@@ -2,7 +2,10 @@
 
 export("%<-%")
 export("%>%")
-export(net_entities)
+export(connect)
+export(visualise)
+export(visualize)
 import(dplyr)
+import(sigmajs)
 importFrom(magrittr,"%>%")
 importFrom(zeallot,"%<-%")

@@ -2,6 +2,9 @@ globalVariables(
     c(
         "entity",
         "target",
+        "weight",
+        "label",
+        "size",
         "uuid",
         "doc",
         "."
@@ -10,18 +13,25 @@ globalVariables(
 
 #' Entities
 #'
-#' Create network from entities
+#' Create network from entities.
 #'
 #' @param data The data, as returned by \link[webhoser]{wh_collect}.
 #' @param from,to Entities to build network.
 #'
 #' @examples
 #' data("webhoser")
-#'
+#' 
+#' # co-mentions
 #' graph <- webhoser %>%
-#'   net_entities(entities.persons)
+#'   connect(entities.persons)
 #'
+#' # unpack
 #' c(nodes, edges) %<-% graph
+#' 
+#' # visualise
+#' webhoser %>%
+#'   connect(entities.persons, entities.locations) %>% 
+#'   visualise()
 #'
 #' @return A \code{list} of length 2 containing \code{data.frame}s:
 #' \itemize{
@@ -29,16 +39,10 @@ globalVariables(
 #'   \item{\code{edges}: The \code{source}, \code{target}, and \code{n}umber of edges.}
 #' }
 #'
-#' @examples
-#' data("webhoser")
-#'
-#' webhoser %>%
-#'   net_entities(entities.persons)
-#'
 #' @details The returned nodes and edges form an \emph{undirected} graph.
 #'
 #' @export
-net_entities <- function(data, from, to = NULL){
+connect <- function(data, from, to = NULL){
 
     if(missing(data) || missing(from))
         stop("Missing data or from", call. = FALSE)
@@ -47,8 +51,7 @@ net_entities <- function(data, from, to = NULL){
     to_enquo <- rlang::enquo(to)
     has_to <- rlang::quo_is_null(to_enquo)
     
-    if(has_to)
-        warning("Building co-mention graph", call. = FALSE)
+    if(has_to) message("Building co-mention graph")
 
     edges <- data %>%
         {
@@ -91,4 +94,3 @@ net_entities <- function(data, from, to = NULL){
     )
 
 }
-

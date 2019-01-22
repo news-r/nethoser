@@ -12,6 +12,7 @@ Imports:
     purrr,
     tidyr,
     rlang,
+    sigmajs,
     zeallot,
     magrittr
 Suggests: webhoser
