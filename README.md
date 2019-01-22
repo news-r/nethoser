@@ -24,4 +24,4 @@ webhoser %>%
   visualise()        # visualise
 ```
 
-![](nethoser.png)
+![](https://github.com/JohnCoene/nethoser/blob/master/netohoser.png)
