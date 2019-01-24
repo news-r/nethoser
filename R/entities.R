@@ -11,12 +11,12 @@ globalVariables(
     )
 )
 
-#' Entities
+#' Connect
 #'
-#' Create network from entities.
+#' Create network from webhoser data.
 #'
 #' @param data The data, as returned by \link[webhoser]{wh_collect}.
-#' @param from,to Entities to build network.
+#' @param from,to Columns to build network.
 #'
 #' @examples
 #' data("webhoser")

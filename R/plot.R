@@ -1,6 +1,6 @@
 #' Visualise
 #' 
-#' Visualise network.
+#' Visualise nethoser network.
 #' 
 #' @param graph A list as returned by \code{\link{connect}}.
 #' 

@@ -13,7 +13,7 @@ visualise(graph)
 \item{graph}{A list as returned by \code{\link{connect}}.}
 }
 \description{
-Visualise network.
+Visualise nethoser network.
 }
 \examples{
 data("webhoser")

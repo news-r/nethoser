@@ -2,14 +2,14 @@
 % Please edit documentation in R/entities.R
 \name{connect}
 \alias{connect}
-\title{Entities}
+\title{Connect}
 \usage{
 connect(data, from, to = NULL)
 }
 \arguments{
 \item{data}{The data, as returned by \link[webhoser]{wh_collect}.}
 
-\item{from, to}{Entities to build network.}
+\item{from, to}{Columns to build network.}
 }
 \value{
 A \code{list} of length 2 containing \code{data.frame}s:
@@ -19,7 +19,7 @@ A \code{list} of length 2 containing \code{data.frame}s:
 }
 }
 \description{
-Create network from entities.
+Create network from webhoser data.
 }
 \details{
 The returned nodes and edges form an \emph{undirected} graph.
