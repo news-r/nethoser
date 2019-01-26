@@ -7,3 +7,7 @@ flat.rds
 .idea
 nethoser.Rproj
 nethoser.png
+index.Rmd
+docs
+pkgdown
+_pkgdown.yml

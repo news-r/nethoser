@@ -28,7 +28,8 @@ visualize <- function(graph){
     sg_edges(edges, id, source, target, weight) %>% 
     sg_layout() %>% 
     sg_cluster() %>% 
-    sg_drag_nodes() 
+    sg_drag_nodes()  %>% 
+    sg_neighbours()
 }
 
 #' @export

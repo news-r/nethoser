@@ -1,0 +1,19 @@
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+# nethoser
+
+<img src="logo.png" style="max-height:200px;" align="left"/>
+
+Networks for [webhoser](https://webhoser.john-coene.com/).
+
+## Example
+
+```{r}
+library(nethoser)
+
+data("webhoser")
+
+webhoser %>%
+    connect(entities.persons, entities.locations) %>%
+    visualise()
+```

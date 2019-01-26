@@ -1,0 +1,73 @@
+---
+title: "Examples"
+author: "John Coene"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(nethoser)
+```
+
+## Data
+
+This vignette uses a dataset of 272 news and blog articles about the R programming language but you can collect your own data using the [webhoser](https://webhoser.john-coene.com/) package which is an R wrapper to the [webhoser.io](https://webhose.io/) API.
+
+```{r}
+library(webhoser)
+
+data("webhoser")
+```
+
+## Basics
+
+The package only consists of one dataset and two functions:
+
+1. `connect` to build a graph by _connecting_ variables.
+2. `visualise` a convenience function which uses [sigmajs](http://sigmajs.john-coene.com/) to visualise the graph.
+
+The `connect` function returns a list of nodes and edges.
+
+```{r}
+g <- webhoser %>% 
+    connect(entities.locations)
+
+class(g)
+```
+
+You can unpack the graph with the `%<-%` assignment exported from the `zeallot` package.
+
+```{r}
+c(nodes, edges) %<-% g
+```
+
+## Co-mentions
+
+We can build graphs of co-mentions by only passing one variable to the `connect` function.
+
+```{r}
+webhoser %>% 
+    connect(entities.persons) %>% 
+    visualise()
+```
+
+# Graph
+
+```{r}
+webhoser  %>% 
+    connect(
+        thread.site,
+        entities.persons
+    ) %>% 
+    visualise()
+```
+
