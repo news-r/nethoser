@@ -48,11 +48,19 @@ You can unpack the graph with the `%<-%` assignment exported from the `zeallot` 
 
 ```{r}
 c(nodes, edges) %<-% g
+
+nodes %>% 
+  head %>% 
+  knitr::kable()
+
+edges %>% 
+  head %>% 
+  knitr::kable()
 ```
 
 ## Co-mentions
 
-We can build graphs of co-mentions by only passing one variable to the `connect` function.
+We can build graphs of co-mentions by only passing one variable to the `connect` function. Below we plot co-mentions of personas in articles; each nodes is a person, they are connected by an edge when they are both mentioned in at least one article.
 
 ```{r}
 webhoser %>% 
@@ -62,11 +70,13 @@ webhoser %>%
 
 # Graph
 
+Below we connect sites to the location they mention in articles.
+
 ```{r}
 webhoser  %>% 
     connect(
         thread.site,
-        entities.persons
+        entities.locations
     ) %>% 
     visualise()
 ```

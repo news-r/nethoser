@@ -20,7 +20,7 @@ data("webhoser")
 
 # make network
 webhoser \%>\%
-  connect(thread.site, entities.persons) \%>\% 
+  connect(thread.site, entities.persons) \%>\%
   visualize()
 
 }
