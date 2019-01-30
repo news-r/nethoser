@@ -6,6 +6,8 @@
 \alias{nethoser-package}
 \title{nethoser: Networks for 'webhoser'}
 \description{
+\if{html}{\figure{logo.png}{options: align='right'}}
+
 Create various networks to understand results of 'webhoser'.
 }
 \author{

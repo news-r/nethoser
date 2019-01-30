@@ -1,0 +1,100 @@
+---
+title: "Examples"
+author: "John Coene"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(nethoser)
+```
+
+## Data
+
+This vignette uses a dataset of 272 news and blog articles about the R programming language but you can collect your own data using the [webhoser](https://webhoser.john-coene.com/) package which is an R wrapper to the [webhoser.io](https://webhose.io/) API.
+
+```{r}
+library(webhoser)
+
+data("webhoser")
+```
+
+## Basics
+
+The package only consists of one dataset and two functions:
+
+1. `connect` to build a graph by _connecting_ variables.
+2. `visualise` a convenience function which uses [sigmajs](http://sigmajs.john-coene.com/) to visualise the graph.
+
+The `connect` function returns a list of nodes and edges.
+
+```{r}
+g <- webhoser %>% 
+    net_con(entities.locations)
+
+class(g)
+```
+
+You can unpack the graph with the `%<-%` assignment exported from the `zeallot` package.
+
+```{r}
+c(nodes, edges) %<-% g
+
+nodes %>% 
+  head %>% 
+  knitr::kable()
+
+edges %>% 
+  head %>% 
+  knitr::kable()
+```
+
+## Co-mentions
+
+We can build graphs of co-mentions by only passing one variable to the `connect` function. Below we plot co-mentions of personas in articles; each nodes is a person, they are connected by an edge when they are both mentioned in at least one article.
+
+```{r}
+webhoser %>% 
+    net_con(entities.persons) %>% 
+    net_vis()
+```
+
+## Graph
+
+Below we connect sites to the location they mention in articles.
+
+```{r}
+webhoser  %>% 
+    net_con(
+        thread.site,
+        entities.locations
+    ) %>% 
+    net_vis()
+```
+
+## Callback
+
+You can pass a callback function to `net_con`.
+
+```{r}
+cb <- function(x){
+  dplyr::filter(x, n > quantile(n, .5))
+}
+
+webhoser  %>% 
+    net_con(
+        thread.site,
+        entities.locations,
+        callback = cb
+    ) %>% 
+    net_vis()
+```

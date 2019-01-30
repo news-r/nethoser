@@ -15,7 +15,11 @@ Imports:
     sigmajs,
     zeallot,
     magrittr
-Suggests: webhoser
+Suggests: 
+    webhoser,
+    knitr,
+    rmarkdown
 Remotes:
     JohnCoene/webhoser
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

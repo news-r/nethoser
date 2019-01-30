@@ -1,6 +1,6 @@
 globalVariables(
     c(
-        "entity",
+        "name",
         "target",
         "weight",
         "label",
@@ -27,7 +27,7 @@ globalVariables(
 #' 
 #' # co-mentions
 #' graph <- webhoser %>%
-#'   connect(entities.persons)
+#'   net_con(entities.persons)
 #'
 #' # unpack
 #' c(nodes, edges) %<-% graph
@@ -57,7 +57,7 @@ globalVariables(
 #' }
 #'
 #' @export
-net_con <- function(data, from, to = NULL, callback){
+net_con <- function(data, from, to = NULL, callback = NULL){
 
     if(missing(data) || missing(from))
         stop("Missing data or from", call. = FALSE)

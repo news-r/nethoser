@@ -10,7 +10,7 @@ net_vis(graph)
 net_viz(graph)
 }
 \arguments{
-\item{graph}{A list as returned by \code{\link{connect}}.}
+\item{graph}{A list as returned by \code{\link{net_con}}.}
 }
 \description{
 Visualise nethoser network.
