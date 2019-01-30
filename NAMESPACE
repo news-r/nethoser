@@ -2,9 +2,9 @@
 
 export("%<-%")
 export("%>%")
-export(connect)
-export(visualise)
-export(visualize)
+export(net_con)
+export(net_vis)
+export(net_viz)
 import(dplyr)
 import(sigmajs)
 importFrom(magrittr,"%>%")

@@ -9,14 +9,14 @@
 #' 
 #' # make network
 #' webhoser %>%
-#'   connect(thread.site, entities.persons) %>% 
-#'   visualize()
+#'   net_con(thread.site, entities.persons) %>% 
+#'   net_vis()
 #' 
 #' @rdname viz
 #' @export
-visualize <- function(graph){
+net_vis <- function(graph){
   nodes <- graph$nodes %>% 
-    select(label = entity, size = n) %>% 
+    select(label = name, size = n) %>% 
     mutate(id = label) 
   
   edges <- graph$edges %>% 
@@ -33,4 +33,4 @@ visualize <- function(graph){
 
 #' @export
 #' @rdname viz
-visualise <- visualize
+net_viz <- net_vis

@@ -17,6 +17,10 @@ globalVariables(
 #'
 #' @param data The data, as returned by \link[webhoser]{wh_collect}.
 #' @param from,to Columns to build network.
+#' @param callback Callback to apply to edges, a data.frame with columns 
+#' \code{source}, \code{target}, \code{n} (number of occurences).
+#'
+#' @details The returned nodes and edges form an \emph{undirected} graph.
 #'
 #' @examples
 #' data("webhoser")
@@ -30,8 +34,21 @@ globalVariables(
 #' 
 #' # visualise
 #' webhoser %>%
-#'   connect(entities.persons, entities.locations) %>% 
-#'   visualise()
+#'   net_con(entities.persons, entities.locations) %>% 
+#'   net_vis()
+#'   
+#' # callback
+#' cb <- function(x){
+#'   dplyr::filter(x, n > 3)
+#' }
+#' 
+#' webhoser %>%
+#'   net_con(
+#'     entities.persons, 
+#'     entities.locations, 
+#'     callback = cb
+#'   ) %>% 
+#'   net_vis()
 #'
 #' @return A \code{list} of length 2 containing \code{data.frame}s:
 #' \itemize{
@@ -39,10 +56,8 @@ globalVariables(
 #'   \item{\code{edges}: The \code{source}, \code{target}, and \code{n}umber of edges.}
 #' }
 #'
-#' @details The returned nodes and edges form an \emph{undirected} graph.
-#'
 #' @export
-connect <- function(data, from, to = NULL){
+net_con <- function(data, from, to = NULL, callback){
 
     if(missing(data) || missing(from))
         stop("Missing data or from", call. = FALSE)
@@ -78,13 +93,16 @@ connect <- function(data, from, to = NULL){
             source = trimws(source),
             target = trimws(target)
         ) %>% 
-        count(source, target, sort = TRUE)
+        count(source, target) 
+    
+    if(!is.null(callback))
+        edges <- callback(x = edges)
 
     nodes <- bind_rows(
-        edges %>% select(entity = source, n),
-        edges %>% select(entity = target, n)
+        edges %>% select(name = source, n),
+        edges %>% select(name = target, n)
     ) %>%
-        group_by(entity) %>%
+        group_by(name) %>%
         summarise(n = sum(n)) %>%
         ungroup()
 
