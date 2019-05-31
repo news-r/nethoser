@@ -10,7 +10,20 @@ Build various graphs from [webhoser](https://webhoser.john-coene.com/) data. Con
 
 ``` r
 # install.packages(remotes)
-remotes::install_github("JohnCoene/nethoser")
+remotes::install_github("news-r/nethoser")
+```
+
+## Examples
+
+```r
+library(nethoser)
+
+data("webhoser")
+
+# make network
+webhoser %>%
+  net_con(thread.site, entities.persons) %>% 
+  net_vis()
 ```
 
 See the [website](http://nethoser.john-coene.com) for examples.
